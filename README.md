@@ -1,12 +1,77 @@
-# React + Vite
+# Розробка веб-форми з використанням Formik та Yup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Цей навчальний проект демонструє створення інтерактивної веб-форми з використанням бібліотек Formik та Yup для керування станом та валідацією даних.
 
-Currently, two official plugins are available:
+## Основні можливості
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Файл форми**: `src/components/Form.tsx`
+- **Поля форми**: номер телефону, електронна адреса, пароль, підтвердження паролю
+- **Керування станом**: використано хук `useFormik`
+- **Валідація**: схема валідації створена за допомогою Yup
+- **Валідаційні правила**:
+    - Обов'язковість заповнення всіх полів
+    - Перевірка формату номеру телефону (тільки цифри і тільки певна кількість)
+    - Перевірка формату електронної пошти
+    - Перевірка відповідності паролю та підтвердження паролю
+- **Відображення помилок**: повідомлення про помилки показуються поряд з відповідними полями
+- **Обробка відправлення**: після успішної валідації дані обробляються, а результат виводиться в інтерфейс користувача як підтвердження коректної роботи форми
 
-## Expanding the ESLint configuration
+## Деплой та репозиторій
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [GitHub репозиторій](https://github.com/Oleksandr-VFU/hw47react-02082025.git)
+- [Демо на Vercel](#)
+
+## Використані технології
+
+- React
+- TypeScript
+- Formik
+- Yup
+
+---
+## Структура проекту
+
+```
+hw10-react-app/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Form.module.css
+|   |   ├── Form.tsx
+│   │   └── validations.ts
+│   ├── App.jsx
+|   ├── global.d.ts
+│   ├── main.jsx
+|   |── index.css
+├── package.json
+├── tsconfig.json
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## Локальний запуск
+
+1. **Клонувати репозиторій:**
+    ```bash
+    git clone https://github.com/Oleksandr-VFU/hw47react-02082025.git
+    cd hw10-react-app
+    ```
+
+2. **Встановити залежності:**
+    ```bash
+    npm install
+    ```
+
+3. **Запустити проект:**
+    ```bash
+    npm run dev
+    ```
+
+4. Відкрити [http://localhost:5173](http://localhost:5173) у браузері.
+
+---
+
+> Проект створено з навчальною метою для практики роботи з формами та валідацією у React.
+

@@ -1,6 +1,13 @@
 import * as Yup from 'yup'
 
-const RegistrationSchema = Yup.object({
+export interface RegistrationFormValues {
+  phone: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const RegistrationSchema: Yup.ObjectSchema<RegistrationFormValues> = Yup.object({
   phone: Yup.string()
     .matches(/^\d{10,14}$/, 'Невірний формат номеру телефону')
     .required('Обовʼязкове поле'),
@@ -11,7 +18,7 @@ const RegistrationSchema = Yup.object({
     .min(6, 'Мінімум 6 символів')
     .required('Обовʼязкове поле'),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Паролі не співпадають')
+    .oneOf([Yup.ref('password'), undefined], 'Паролі не співпадають')
     .required('Підтвердіть пароль')
 });
 

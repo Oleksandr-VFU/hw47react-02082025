@@ -3,10 +3,18 @@ import { useFormik } from 'formik'
 import RegistrationSchema from './validations'
 import styles from './Form.module.css'
 
+interface FormValues {
+    phone: number;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    values?: object;
+}
+
 const Form = () => {
-    const [formData, setFormData] = useState(null)
-    const formik = useFormik({
-        initialValues: {phone: '', email: '', password: '', confirmPassword: ''},
+    const [formData, setFormData] = useState<FormValues | null>(null)
+    const formik = useFormik<FormValues>({
+        initialValues: {phone: 0, email: '', password: '', confirmPassword: ''},
         validationSchema: RegistrationSchema,
         onSubmit: (values) => {
             console.log('Submitted: ', values);

@@ -19,7 +19,7 @@
 ## Деплой та репозиторій
 
 - [GitHub репозиторій](https://github.com/Oleksandr-VFU/hw47react-02082025.git)
-- [Демо на Vercel](#)
+- [Демо на Vercel](https://hw47react-02082025.vercel.app/)
 
 ## Використані технології
 

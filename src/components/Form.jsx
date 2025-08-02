@@ -1,93 +1,86 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
-
-
-const RegistrationSchema = Yup.object({
-  phone: Yup.string()
-    .matches(/^\d{10,14}$/, 'Невірний формат номеру телефону')
-    .required('Обовʼязкове поле'),
-  email: Yup.string()
-    .email('Невірний email')
-    .required('Обовʼязкове поле'),
-  password: Yup.string()
-    .min(6, 'Мінімум 6 символів')
-    .required('Обовʼязкове поле'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Паролі не співпадають')
-    .required('Підтвердіть пароль')
-});
+import RegistrationSchema from './validations'
+import styles from './Form.module.css'
 
 const Form = () => {
+    const [formData, setFormData] = useState(null)
     const formik = useFormik({
         initialValues: {phone: '', email: '', password: '', confirmPassword: ''},
         validationSchema: RegistrationSchema,
-        onSubmit: (values) => {console.log('Submitted: ', values)}
+        onSubmit: (values) => {
+            console.log('Submitted: ', values);
+            setFormData(values)
+        }
     });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-        <div>
-            <label htmlFor="phone-input">Телефон:</label>
-            <input
-                id="phone-input"
-                name="phone"
-                value={formik.values.phone}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-            />
-            {formik.touched.phone && formik.errors.phone && (
-                <div style={{color: 'red'}}>{formik.errors.phone}</div>
-            )}
-        </div>
+    <div className={styles.container}>
+        {formData && <h4 className={styles.title}>Валідовано користувача: {formData?.email}</h4>}
+        <form onSubmit={formik.handleSubmit}>
+            <div className={styles.field}>
+                <label htmlFor="phone-input" className={styles.label}>Телефон:</label>
+                <input
+                    id="phone-input"
+                    name="phone"
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
+                {formik.touched.phone && formik.errors.phone && (
+                    <div className={styles.error}>{formik.errors.phone}</div>
+                )}
+            </div>
 
-        <div>
-            <label htmlFor="email-input">Email:</label>
-            <input
-                id="email-input"
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-            />
-            {formik.touched.email && formik.errors.email && (
-                <div style={{color: 'red'}}>{formik.errors.email}</div>
-            )}
-        </div>
+            <div className={styles.field}>
+                <label htmlFor="email-input" className={styles.label}>Email:</label>
+                <input
+                    id="email-input"
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
+                {formik.touched.email && formik.errors.email && (
+                    <div className={styles.error}>{formik.errors.email}</div>
+                )}
+            </div>
 
-        <div>
-            <label htmlFor="paswd-input">Пароль:</label>
-            <input
-                id="paswd-input"
-                name="password"
-                type="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-            />
-            {formik.touched.password && formik.errors.password && (
-                <div style={{color: 'red'}}>{formik.errors.password}</div>
-            )}
-        </div>
+            <div className={styles.field}>
+                <label htmlFor="paswd-input" className={styles.label}>Пароль:</label>
+                <input
+                    id="paswd-input"
+                    name="password"
+                    type="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
+                {formik.touched.password && formik.errors.password && (
+                    <div className={styles.error}>{formik.errors.password}</div>
+                )}
+            </div>
 
-        <div>
-            <label htmlFor="confirmPaswd-input">Підтвердження Пароля:</label>
-            <input
-                id="confirmPaswd-input"
-                name="confirmPassword"
-                type="password"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-            />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                <div style={{color: 'red'}}>{formik.errors.confirmPassword}</div>
-            )}
-        </div>
+            <div className={styles.field}>
+                <label htmlFor="confirmPaswd-input" className={styles.label}>Підтвердження Пароля:</label>
+                <input
+                    id="confirmPaswd-input"
+                    name="confirmPassword"
+                    type="password"
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                />
+                {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+                    <div className={styles.error}>{formik.errors.confirmPassword}</div>
+                )}
+            </div>
 
-        <button type="submit">Відправити</button>
-        
-    </form>
+            <button type="submit" className={styles.button}>Відправити</button>
+            
+        </form>
+    </div>
+
   )
 }
 

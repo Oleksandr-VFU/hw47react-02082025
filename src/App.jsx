@@ -5,6 +5,7 @@ function App() {
 
   return (
     <>
+      <h2>Розробка веб-форми з використанням Formik та Yup</h2>
       <Form />
     </>
   )
